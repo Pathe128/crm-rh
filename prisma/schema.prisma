@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String         @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String         @unique
+  password       String
+  phoneNumber    String
+  address        String
+  startDate      DateTime
+  endDate        DateTime
+  jobTitle       String
+  employmentType EmploymentType
+  salaireBrut    Float
+  status         Status
+  photo          String?
+  role           Role
+  departmentId   Int?
+  department     Department?    @relation("DepartmentUsers", fields: [departmentId], references: [id])
+  departmentsLed Department[]   @relation("DepartmentHead")
+  leaves         Leave[]        @relation("UserLeaves")
+  leaveBalances  LeaveBalance[] @relation("UserLeaveBalances")
+  validatedLeaves Leave[]       @relation("LeaveValidator")
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  deletedAt      DateTime?
+}
+
+model Department {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  headId      String?  
+  head        User?    @relation("DepartmentHead", fields: [headId], references: [id])
+  users       User[]   @relation("DepartmentUsers")
+  positions   Position[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Leave {
+  id            String      @id @default(cuid())
+  leaveTypeId   Int
+  leaveType     LeaveType   @relation("LeaveTypeLeaves", fields: [leaveTypeId], references: [id])
+  year          String      @default("")
+  startDate     DateTime
+  endDate       DateTime
+  days          Int
+  userName      String
+  userNote      String?
+  tasksLink     String?
+  userEmail     String
+  status        LeaveStatus @default(PENDING)
+  moderatorId   String?     
+  moderator     User?       @relation("LeaveValidator", fields: [moderatorId], references: [id])
+  moderatorNote String?     
+  userId        String
+  user          User        @relation("UserLeaves", fields: [userId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model LeaveType {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  description String?
+  annualQuota Int
+  remuneration Boolean      @default(false)
+  leaves      Leave[]       @relation("LeaveTypeLeaves")
+  leaveBalances LeaveBalance[] @relation("LeaveTypeBalances")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model LeaveBalance {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  leaveTypeId Int
+  balance     Int
+  user        User     @relation("UserLeaveBalances", fields: [userId], references: [id])
+  leaveType   LeaveType @relation("LeaveTypeBalances", fields: [leaveTypeId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, leaveTypeId])
+}
+
+model Position {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  level       PositionLevel
+  status      PositionStatus @default(ACTIVE)
+  departmentId Int?
+  department  Department? @relation(fields: [departmentId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+  EMPLOYEE
+  MANAGER
+  RH
+}
+
+enum EmploymentType {
+  consultant
+  CDI
+  CDD
+  stage
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum PositionLevel {
+  JUNIOR
+  INTERMEDIATE
+  SENIOR
+  MANAGER
+  DIRECTOR
+}
+
+enum PositionStatus {
+  ACTIVE
+  INACTIVE
+}
