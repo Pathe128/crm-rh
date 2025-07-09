@@ -28,9 +28,9 @@ export default function HomePage() {
       <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
-          <h1 className="text-2xl font-bold text-base-content mb-2">
-            Chargement de l'application RH
-          </h1>
+                      <h1 className="text-2xl font-bold text-base-content mb-2">
+              Chargement de l&apos;application RH
+            </h1>
           <p className="text-base-content/70">
             Vérification de l'authentification...
           </p>
@@ -44,9 +44,9 @@ export default function HomePage() {
       <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
-          <h1 className="text-2xl font-bold text-base-content mb-2">
-            Redirection vers l'espace de travail
-          </h1>
+                      <h1 className="text-2xl font-bold text-base-content mb-2">
+              Redirection vers l&apos;espace de travail
+            </h1>
           <p className="text-base-content/70">
             Vous allez être redirigé automatiquement...
           </p>
@@ -139,7 +139,7 @@ export default function HomePage() {
               </div>
               
               <p className="text-xs text-base-content/50 mt-4">
-                En continuant, vous acceptez nos conditions d'utilisation et notre politique de confidentialité
+                En continuant, vous acceptez nos conditions d&apos;utilisation et notre politique de confidentialité
               </p>
             </div>
           </div>

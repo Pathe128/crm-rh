@@ -3,16 +3,11 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/card';
 import { Button } from '../../components/ui/button';
-import { Badge } from '../../components/ui/badge';
 import { 
   Mail, 
   Phone, 
   MapPin, 
-  Clock,
-  Send,
-  MessageSquare,
-  Building2,
-  Users
+  MessageSquare
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -59,7 +54,7 @@ export default function ContactPage() {
 
   const faqs = [
     {
-      q: "Comment obtenir de l'aide rapidement ?",
+      q: "Comment obtenir de l&apos;aide rapidement ?",
       a: "Utilisez le formulaire ou appelez-nous pour une réponse prioritaire."
     },
     {

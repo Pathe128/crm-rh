@@ -140,7 +140,7 @@ export default function AboutPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 mb-4">
-              Développé par une équipe passionnée de développeurs et d'experts RH, RH Manager combine expertise technique et connaissance métier pour offrir la meilleure solution de gestion RH.
+              Développé par une équipe passionnée de développeurs et d&apos;experts RH, RH Manager combine expertise technique et connaissance métier pour offrir la meilleure solution de gestion RH.
             </p>
             <div className="flex items-center space-x-2">
               <Badge variant="secondary" className="bg-primary/10 text-primary">Version 1.0.0</Badge>
